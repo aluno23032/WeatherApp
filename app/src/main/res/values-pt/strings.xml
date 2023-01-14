@@ -1,0 +1,5 @@
+<resources>
+    <string name="get_weather">Obter Temperatura</string>
+    <string name="temperature">%1$S Cº em %2$s</string>
+    <string name="error">Algo correu mal!</string>
+</resources>
