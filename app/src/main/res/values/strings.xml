@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">WeatherApp</string>
     <string name="get_weather">Get Weather</string>
-    <string name="temperature">%1$S Cº in %2$s</string>
+    <string name="temperature" translatable="false">%1$sº</string>
     <string name="error">Something went wrong!</string>
+    <string name="peaks" translatable="false">Min.:%1$sº Max.:%2$s</string>
 </resources>
