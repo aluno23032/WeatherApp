@@ -8,6 +8,7 @@ import android.location.Location
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -34,6 +35,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val rightNow = Calendar.getInstance()
+        val hour: Int =rightNow.get(Calendar.HOUR_OF_DAY)
+        val root = findViewById<RelativeLayout>(R.id.root)
+        if (hour !in 6..18) {
+            root.setBackgroundResource(R.drawable.bgnight)
+        }
         city = findViewById(R.id.city)
         temperature = findViewById(R.id.temperature)
         weather = findViewById(R.id.weather)
