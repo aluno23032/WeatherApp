@@ -31,15 +31,20 @@ class MainActivity : AppCompatActivity() {
     private lateinit var weather: TextView
     private lateinit var peaks: TextView
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        getSupportActionBar()?.hide();
+
         val rightNow = Calendar.getInstance()
         val hour: Int =rightNow.get(Calendar.HOUR_OF_DAY)
         val root = findViewById<RelativeLayout>(R.id.root)
         if (hour !in 6..18) {
-            root.setBackgroundResource(R.drawable.bgnight)
+            root.setBackgroundResource(R.drawable.bggradientnight)
+        } else {
+            root.setBackgroundResource(R.drawable.bggradientday)
         }
         city = findViewById(R.id.city)
         temperature = findViewById(R.id.temperature)
