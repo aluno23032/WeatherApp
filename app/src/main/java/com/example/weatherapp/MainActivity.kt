@@ -3,7 +3,6 @@ package com.example.weatherapp
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
-import android.icu.text.SimpleDateFormat
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
@@ -36,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        getSupportActionBar()?.hide();
+        supportActionBar?.hide()
 
         val rightNow = Calendar.getInstance()
         val hour: Int =rightNow.get(Calendar.HOUR_OF_DAY)
@@ -80,13 +79,10 @@ class MainActivity : AppCompatActivity() {
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
                 //get the latitude and longitude and create the http URL
-                weatherUrl = "https://api.weatherbit.io/v2.0/current?" + "lang=" + Locale.getDefault().language + "&lat=" + location?.latitude +"&lon="+ location?.longitude + "&key="+ apikey
-                Log.e("lat", weatherUrl)
-                val sdf = SimpleDateFormat("yyyy-MM-dd")
-                val currentDate = sdf.format(Date())
-                Log.e("Date", currentDate)
-                weatherUrl2 = "https://api.weatherbit.io/v2.0/history/daily?" + "lat=" + location?.latitude +"&lon="+ location?.longitude + "&start_date="+ currentDate + "&end_date="+ currentDate + "&key="+ apikey
-                Log.e("lat", weatherUrl2)
+                weatherUrl = "https://api.weatherbit.io/v2.0/current?lang=" + Locale.getDefault().language + "&lat=" + location?.latitude +"&lon="+ location?.longitude + "&key="+ apikey
+                Log.d("lat", weatherUrl)
+                weatherUrl2 = "https://api.weatherbit.io/v2.0/forecast/daily?lat=" + location?.latitude +"&lon="+ location?.longitude + "&key="+ apikey + "&lang=" + Locale.getDefault().language + "&days=7"
+                Log.d("lat", weatherUrl2)
                 //this function will fetch data from URL
                 getTemp()
             }
@@ -96,20 +92,17 @@ class MainActivity : AppCompatActivity() {
         val queue = Volley.newRequestQueue(this)
         val url: String = weatherUrl
         val url2: String = weatherUrl2
-        Log.e("lat", url)
         // Request a string response from the provided URL.
         val stringReq = StringRequest(
             Request.Method.GET, url,
             { response ->
-                Log.e("lat", response.toString())
                 //get the JSON object
                 val obj = JSONObject(response)
                 //get the Array from obj of name - "data"
                 val arr = obj.getJSONArray("data")
-                Log.e("lat obj1", arr.toString())
+                Log.d("lat obj1", arr.toString())
                 //get the JSON object from the array at index position 0
                 val obj2 = arr.getJSONObject(0)
-                Log.e("lat obj2", obj2.toString())
                 val arr2 = obj2.getJSONObject("weather")
                 //set the temperature and the city name using getString() function
                 city.text = obj2.getString("city_name")
@@ -122,15 +115,13 @@ class MainActivity : AppCompatActivity() {
         val stringReq2 = StringRequest(
             Request.Method.GET, url2,
             { response ->
-                Log.e("lat", response.toString())
                 //get the JSON object
                 val obj = JSONObject(response)
                 //get the Array from obj of name - "data"
                 val arr = obj.getJSONArray("data")
-                Log.e("lat obj1", arr.toString())
+                Log.d("lat obj1", arr.toString())
                 //get the JSON object from the array at index position 0
                 val obj2 = arr.getJSONObject(0)
-                Log.e("lat obj2", obj2.toString())
                 //set the temperature and the city name using getString() function
                 peaks.text = getString(R.string.peaks, obj2.getString("min_temp"), obj2.getString("max_temp"))
             },

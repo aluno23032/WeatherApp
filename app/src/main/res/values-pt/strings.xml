@@ -1,4 +1,3 @@
 <resources>
-    <string name="get_weather">Obter Temperatura</string>
     <string name="error">Algo correu mal!</string>
 </resources>
