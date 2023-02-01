@@ -24,7 +24,7 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
     private var weatherUrl = ""
     private var weatherUrl2 = ""
-    private var apikey = "6ed6199c40174da593a7091e683ace8d"
+    private var apikey = "f44d87def21a4442a82fa73e0fbe4623"
     private lateinit var city: TextView
     private lateinit var temperature: TextView
     private lateinit var weather: TextView
@@ -36,14 +36,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
-
         val rightNow = Calendar.getInstance()
         val hour: Int =rightNow.get(Calendar.HOUR_OF_DAY)
         val root = findViewById<RelativeLayout>(R.id.root)
-        if (hour !in 6..18) {
+        val forecast = findViewById<TextView>(R.id.forecast)
+        if (hour !in 6..20) {
             root.setBackgroundResource(R.drawable.bggradientnight)
+            forecast.setBackgroundResource(R.drawable.rectanglenight)
         } else {
             root.setBackgroundResource(R.drawable.bggradientday)
+            forecast.setBackgroundResource(R.drawable.rectangleday)
         }
         city = findViewById(R.id.city)
         temperature = findViewById(R.id.temperature)

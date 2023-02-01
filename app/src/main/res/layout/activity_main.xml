@@ -64,5 +64,23 @@
         android:textSize="18sp"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/forecast"
+        android:layout_width="match_parent"
+        android:layout_height="475sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="235dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/rectanglenight"
+        android:fontFamily="sans-serif-light"
+        android:paddingStart="15sp"
+        android:paddingTop="10sp"
+        android:text="@string/forecast"
+        android:textColor="#bcbcbc"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:ignore="RtlSymmetry" />
 
 </RelativeLayout>

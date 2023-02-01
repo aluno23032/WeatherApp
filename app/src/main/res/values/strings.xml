@@ -3,4 +3,5 @@
     <string name="temperature" translatable="false">%1$sº</string>
     <string name="error">Something went wrong!</string>
     <string name="peaks" translatable="false">Min.:%1$sº Max.:%2$sº</string>
+    <string name="forecast">Forecast (7 days)</string>
 </resources>

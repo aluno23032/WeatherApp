@@ -1,3 +1,4 @@
 <resources>
     <string name="error">Algo correu mal!</string>
+    <string name="forecast">Previsão do tempo (7 dias)</string>
 </resources>
