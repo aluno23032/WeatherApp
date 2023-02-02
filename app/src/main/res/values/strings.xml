@@ -4,4 +4,13 @@
     <string name="error">Something went wrong!</string>
     <string name="peaks" translatable="false">Min.:%1$sº Max.:%2$sº</string>
     <string name="forecast">Forecast (7 days)</string>
+    <string name="today">Today</string>
+    <string name="monday">Mon. </string>
+    <string name="tuesday">Tue. </string>
+    <string name="wednesday">Wed. </string>
+    <string name="thursday">Thu. </string>
+    <string name="friday">Fri. </string>
+    <string name="saturday">Sat. </string>
+    <string name="sunday">Sun. </string>
+    <string name="nogps">If you see this text, you need to enable GPS permissions for this app</string>
 </resources>

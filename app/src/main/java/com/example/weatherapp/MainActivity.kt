@@ -24,7 +24,7 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
     private var weatherUrl = ""
     private var weatherUrl2 = ""
-    private var apikey = "f44d87def21a4442a82fa73e0fbe4623"
+    private var apikey = "42972b7195ca4ae69e393c77a00f4284"
     private lateinit var city: TextView
     private lateinit var temperature: TextView
     private lateinit var weather: TextView

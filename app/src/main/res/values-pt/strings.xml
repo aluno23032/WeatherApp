@@ -1,4 +1,13 @@
 <resources>
     <string name="error">Algo correu mal!</string>
     <string name="forecast">Previsão do tempo (7 dias)</string>
+    <string name="today">Hoje</string>
+    <string name="monday">Seg.</string>
+    <string name="tuesday">Ter.</string>
+    <string name="wednesday">Qua.</string>
+    <string name="thursday">Qui.</string>
+    <string name="friday">Sex.</string>
+    <string name="saturday">Sáb.</string>
+    <string name="sunday">Dom.</string>
+    <string name="nogps">Se está a ver este texto, tem de ativar permissões GPS para esta app.</string>
 </resources>
