@@ -12,4 +12,5 @@
     <string name="sunday">Dom.</string>
     <string name="nogps">Se está a ver este texto, tem de ativar permissões GPS para esta app.</string>
     <string name="CloseDrawer">Fechar menu navegação</string>
+    <string name="description">Clima</string>
 </resources>

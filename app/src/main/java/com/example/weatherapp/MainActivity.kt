@@ -7,18 +7,18 @@ import android.location.Location
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TableLayout
 import android.widget.TextView
-import androidx.annotation.NonNull
 import androidx.appcompat.widget.Toolbar
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
@@ -29,17 +29,15 @@ import com.google.android.material.navigation.NavigationView
 import org.json.JSONObject
 import java.util.*
 
-
 class MainActivity : AppCompatActivity() {
-    /*private lateinit var drawerlayout: DrawerLayout;
-    private lateinit var navigationView: NavigationView;
-    private lateinit var toolbar: Toolbar;*/
-
     private var weatherUrl = ""
     private var weatherUrl2 = ""
     private var weatherUrl3 = ""
     private var apikey = "42972b7195ca4ae69e393c77a00f4284"
-    private var apikey2 = "42972b7195ca4ae69e393c77a00f4284"
+    private lateinit var tableLayout: TableLayout
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navigationView: NavigationView
+    private lateinit var toolbar: Toolbar
     private lateinit var rightNow: Calendar
     private lateinit var city: TextView
     private lateinit var temperature: TextView
@@ -72,48 +70,39 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
-        val navigationView = findViewById<NavigationView>(R.id.navigationView)
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-
-        setSupportActionBar(toolbar);
-
+        drawerLayout = findViewById(R.id.drawerLayout)
+        navigationView = findViewById(R.id.navigationView)
+        toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
         val toggle = ActionBarDrawerToggle(
             this, drawerLayout, toolbar, R.string.OpenDrawer, R.string.CloseDrawer)
-
-        drawerLayout.addDrawerListener(toggle);
-
-        toggle.syncState();
-
-        navigationView.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener (){
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-
-                if(id==R.id.optHome){
-
-                } else if (id==R.id.optRegisto){
-
-                } else {
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+        navigationView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.optHome -> {
+                    loadFragment(AFragment())
+                }
+                R.id.optRegisto -> {
 
                 }
-                return true;
+                else -> {
+
+                }
             }
-        })
-
-
-        val tableLayout = findViewById<TableLayout>(R.id.tableLayout)
+            drawerLayout.closeDrawer(GravityCompat.START)
+            true
+        }
+        tableLayout = findViewById(R.id.tableLayout)
         tableLayout.visibility = View.INVISIBLE
         supportActionBar?.hide()
         rightNow = Calendar.getInstance()
         val hour: Int = rightNow.get(Calendar.HOUR_OF_DAY)
-        val root = findViewById<DrawerLayout>(R.id.drawerLayout)
         if (hour !in 6..20) {
-            root.setBackgroundResource(R.drawable.bggradientnight)
+            drawerLayout.setBackgroundResource(R.drawable.bggradientnight)
             tableLayout.setBackgroundResource(R.drawable.rectanglenight)
         } else {
-            root.setBackgroundResource(R.drawable.bggradientday)
+            drawerLayout.setBackgroundResource(R.drawable.bggradientday)
             tableLayout.setBackgroundResource(R.drawable.rectangleday)
         }
         weekDays()
@@ -121,6 +110,21 @@ class MainActivity : AppCompatActivity() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         obtainLocation()
         tableLayout.visibility = View.VISIBLE
+    }
+
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+    private fun loadFragment(fragment: Fragment) {
+        val fm = supportFragmentManager
+        val ft = fm.beginTransaction()
+        ft.add(R.id.container, fragment)
+        ft.commit()
     }
 
     private fun weekDays() {
@@ -193,7 +197,7 @@ class MainActivity : AppCompatActivity() {
                 //get the latitude and longitude and create the http URL
                 weatherUrl = "https://api.weatherbit.io/v2.0/current?lang=" + Locale.getDefault().language + "&lat=" + location?.latitude +"&lon="+ location?.longitude + "&key="+ apikey
                 Log.d("query1", weatherUrl)
-                weatherUrl2 = "https://api.weatherbit.io/v2.0/forecast/daily?lat=" + location?.latitude +"&lon="+ location?.longitude + "&key="+ apikey2 + "&lang=" + Locale.getDefault().language + "&days=7"
+                weatherUrl2 = "https://api.weatherbit.io/v2.0/forecast/daily?lat=" + location?.latitude +"&lon="+ location?.longitude + "&key="+ apikey + "&lang=" + Locale.getDefault().language + "&days=7"
                 Log.d("query2", weatherUrl2)
                 //this function will fetch data from URL
                 getTemp()
@@ -268,7 +272,7 @@ class MainActivity : AppCompatActivity() {
                 weather.text = arr2["description"].toString()
             },
             //In case of any error
-            {})
+            {tableLayout.visibility = View.INVISIBLE})
         stringReq.retryPolicy = DefaultRetryPolicy(1000,
             0,  // maxNumRetries = 0 means no retry
             DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
@@ -314,7 +318,7 @@ class MainActivity : AppCompatActivity() {
                 imgday7.setImageResource(getImage(arr8["description"].toString()))
             },
             //In case of any error
-            {})
+            {tableLayout.visibility = View.INVISIBLE})
         queue.add(stringReq2)
     }
 }
