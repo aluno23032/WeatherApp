@@ -11,9 +11,8 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TableLayout
 import android.widget.TextView
-import androidx.appcompat.widget.Toolbar
+import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
@@ -37,7 +36,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tableLayout: TableLayout
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
-    private lateinit var toolbar: Toolbar
     private lateinit var rightNow: Calendar
     private lateinit var city: TextView
     private lateinit var temperature: TextView
@@ -72,19 +70,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         drawerLayout = findViewById(R.id.drawerLayout)
         navigationView = findViewById(R.id.navigationView)
-        toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        val toggle = ActionBarDrawerToggle(
-            this, drawerLayout, toolbar, R.string.OpenDrawer, R.string.CloseDrawer)
-        drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
         navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.optHome -> {
                     loadFragment(AFragment())
                 }
                 R.id.optRegisto -> {
-
+                    Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+                }
+                R.id.optLogin -> {
                 }
                 else -> {
 
@@ -92,6 +86,10 @@ class MainActivity : AppCompatActivity() {
             }
             drawerLayout.closeDrawer(GravityCompat.START)
             true
+        }
+        val menu = findViewById<ImageView>(R.id.menu)
+        menu.setOnClickListener{
+            drawerLayout.openDrawer(GravityCompat.START)
         }
         tableLayout = findViewById(R.id.tableLayout)
         tableLayout.visibility = View.INVISIBLE
@@ -110,14 +108,6 @@ class MainActivity : AppCompatActivity() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         obtainLocation()
         tableLayout.visibility = View.VISIBLE
-    }
-
-    override fun onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
-            drawerLayout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
-        }
     }
 
     private fun loadFragment(fragment: Fragment) {

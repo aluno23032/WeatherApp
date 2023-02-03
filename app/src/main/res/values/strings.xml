@@ -16,4 +16,5 @@
     <string name="sunday">Sun. </string>
     <string name="nogps">If you see this text, you need to enable GPS permissions for this app</string>
     <string name="description">Weather</string>
+    <string name="menu" translatable="false">Menu</string>
 </resources>
