@@ -7,25 +7,34 @@ import android.location.Location
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
-import android.widget.RelativeLayout
 import android.widget.TableLayout
 import android.widget.TextView
+import androidx.annotation.NonNull
+import androidx.appcompat.widget.Toolbar
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.material.navigation.NavigationView
 import org.json.JSONObject
 import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
+    /*private lateinit var drawerlayout: DrawerLayout;
+    private lateinit var navigationView: NavigationView;
+    private lateinit var toolbar: Toolbar;*/
+
     private var weatherUrl = ""
     private var weatherUrl2 = ""
     private var weatherUrl3 = ""
@@ -63,12 +72,43 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
+        val navigationView = findViewById<NavigationView>(R.id.navigationView)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+
+        setSupportActionBar(toolbar);
+
+        val toggle = ActionBarDrawerToggle(
+            this, drawerLayout, toolbar, R.string.OpenDrawer, R.string.CloseDrawer)
+
+        drawerLayout.addDrawerListener(toggle);
+
+        toggle.syncState();
+
+        navigationView.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener (){
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+
+                if(id==R.id.optHome){
+
+                } else if (id==R.id.optRegisto){
+
+                } else {
+
+                }
+                return true;
+            }
+        })
+
+
         val tableLayout = findViewById<TableLayout>(R.id.tableLayout)
         tableLayout.visibility = View.INVISIBLE
         supportActionBar?.hide()
         rightNow = Calendar.getInstance()
         val hour: Int = rightNow.get(Calendar.HOUR_OF_DAY)
-        val root = findViewById<RelativeLayout>(R.id.root)
+        val root = findViewById<DrawerLayout>(R.id.drawerLayout)
         if (hour !in 6..20) {
             root.setBackgroundResource(R.drawable.bggradientnight)
             tableLayout.setBackgroundResource(R.drawable.rectanglenight)

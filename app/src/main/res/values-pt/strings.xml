@@ -1,4 +1,5 @@
 <resources>
+    <string name="OpenDrawer">Abrir menu navegação</string>
     <string name="error">Algo correu mal!</string>
     <string name="forecast">Previsão do tempo (7 dias)</string>
     <string name="today">Hoje</string>
@@ -10,4 +11,5 @@
     <string name="saturday">Sáb.</string>
     <string name="sunday">Dom.</string>
     <string name="nogps">Se está a ver este texto, tem de ativar permissões GPS para esta app.</string>
+    <string name="CloseDrawer">Fechar menu navegação</string>
 </resources>

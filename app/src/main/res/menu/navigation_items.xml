@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/optHome"
+        android:title="Home"
+        android:icon="@drawable/ic_home"/>
+
+    <item
+        android:id="@+id/optRegisto"
+        android:title="Registo"
+        android:icon="@drawable/ic_registo"/>
+
+    <item
+        android:id="@+id/optLogin"
+        android:title="Login"
+        android:icon="@drawable/ic_login"/>
+
+</menu>
