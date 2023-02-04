@@ -7,25 +7,20 @@
     android:background="#1C52BC"
     android:gravity="center_vertical"
     android:orientation="vertical">
-    
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher"
-        android:contentDescription="Header Image"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="AppWeather"
-        android:textSize="24sp"
+        android:layout_marginTop="100dp"
+        android:text="@string/welcome"
+        android:textSize="20sp"
         android:textStyle="bold"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="A melhor app do tempo do universo e arredores"
-        android:textSize="14sp"
+        android:text="Username"
+        android:textSize="32sp"
         android:textStyle="bold"/>
 
 </LinearLayout>

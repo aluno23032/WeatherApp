@@ -8,10 +8,10 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TableLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -28,11 +28,12 @@ import com.google.android.material.navigation.NavigationView
 import org.json.JSONObject
 import java.util.*
 
+
 class MainActivity : AppCompatActivity() {
     private var weatherUrl = ""
     private var weatherUrl2 = ""
     private var weatherUrl3 = ""
-    private var apikey = "42972b7195ca4ae69e393c77a00f4284"
+    private var apikey = "6ed6199c40174da593a7091e683ace8d"
     private lateinit var tableLayout: TableLayout
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
@@ -68,31 +69,36 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        tableLayout = findViewById(R.id.tableLayout)
+        tableLayout.visibility = View.INVISIBLE
         drawerLayout = findViewById(R.id.drawerLayout)
         navigationView = findViewById(R.id.navigationView)
+        val container = findViewById<FrameLayout>(R.id.container)
         navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.optHome -> {
-                    loadFragment(AFragment())
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    container.visibility = View.INVISIBLE
                 }
-                R.id.optRegisto -> {
-                    Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+                R.id.optRegister -> {
+                    loadFragment(RegisterFragment())
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    container.visibility = View.VISIBLE
                 }
                 R.id.optLogin -> {
+                    loadFragment(LoginFragment())
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    container.visibility = View.VISIBLE
                 }
                 else -> {
-
                 }
             }
-            drawerLayout.closeDrawer(GravityCompat.START)
             true
         }
         val menu = findViewById<ImageView>(R.id.menu)
         menu.setOnClickListener{
             drawerLayout.openDrawer(GravityCompat.START)
         }
-        tableLayout = findViewById(R.id.tableLayout)
-        tableLayout.visibility = View.INVISIBLE
         supportActionBar?.hide()
         rightNow = Calendar.getInstance()
         val hour: Int = rightNow.get(Calendar.HOUR_OF_DAY)
@@ -111,10 +117,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadFragment(fragment: Fragment) {
-        val fm = supportFragmentManager
-        val ft = fm.beginTransaction()
+        val ft = supportFragmentManager.beginTransaction()
         ft.add(R.id.container, fragment)
         ft.commit()
+    }
+
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START)
+        }
     }
 
     private fun weekDays() {

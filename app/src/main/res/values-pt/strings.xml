@@ -13,4 +13,8 @@
     <string name="nogps">Se está a ver este texto, tem de ativar permissões GPS para esta app.</string>
     <string name="CloseDrawer">Fechar menu navegação</string>
     <string name="description">Clima</string>
+    <string name="register">Registar</string>
+    <string name="login">Login</string>
+    <string name="home">Página principal</string>
+    <string name="welcome">Bem-vindo!</string>
 </resources>

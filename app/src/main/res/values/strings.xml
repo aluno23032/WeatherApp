@@ -17,4 +17,8 @@
     <string name="nogps">If you see this text, you need to enable GPS permissions for this app</string>
     <string name="description">Weather</string>
     <string name="menu" translatable="false">Menu</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="home">Home</string>
+    <string name="welcome">Welcome!</string>
 </resources>

@@ -3,17 +3,17 @@
 
     <item
         android:id="@+id/optHome"
-        android:title="Home"
+        android:title="@string/home"
         android:icon="@drawable/ic_home"/>
 
     <item
-        android:id="@+id/optRegisto"
-        android:title="Registo"
-        android:icon="@drawable/ic_registo"/>
+        android:id="@+id/optRegister"
+        android:title="@string/register"
+        android:icon="@drawable/ic_register"/>
 
     <item
         android:id="@+id/optLogin"
-        android:title="Login"
+        android:title="@string/login"
         android:icon="@drawable/ic_login"/>
 
 </menu>
