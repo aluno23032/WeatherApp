@@ -98,10 +98,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         rightNow = Calendar.getInstance()
         val hour: Int = rightNow.get(Calendar.HOUR_OF_DAY)
-        if (hour !in 6..20) {
-            drawerLayout.setBackgroundResource(R.drawable.bggradientnight)
-            tableLayout.setBackgroundResource(R.drawable.rectanglenight)
-        } else {
+        if (hour in 6..20) {
             drawerLayout.setBackgroundResource(R.drawable.bggradientday)
             tableLayout.setBackgroundResource(R.drawable.rectangleday)
         }

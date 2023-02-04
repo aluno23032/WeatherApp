@@ -3,9 +3,13 @@ package com.example.weatherapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import com.example.weatherapp.databinding.ActivityRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
+import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
@@ -15,6 +19,16 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
         firebaseAuth = FirebaseAuth.getInstance()
+        val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
+        val menu = findViewById<ImageView>(R.id.menu)
+        menu.setOnClickListener{
+            drawerLayout.openDrawer(GravityCompat.START)
+        }
+        val rightNow = Calendar.getInstance()
+        val hour: Int = rightNow.get(Calendar.HOUR_OF_DAY)
+        if (hour in 6..20) {
+            drawerLayout.setBackgroundResource(R.drawable.bggradientday)
+        }
         binding.signupButton.setOnClickListener {
             val email = binding.signupEmail.text.toString()
             val password = binding.signupPassword.text.toString()

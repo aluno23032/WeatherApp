@@ -7,10 +7,14 @@ import android.os.Bundle
 import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import com.example.weatherapp.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
+import java.util.*
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -20,6 +24,16 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         firebaseAuth = FirebaseAuth.getInstance()
+        val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
+        val menu = findViewById<ImageView>(R.id.menu)
+        menu.setOnClickListener{
+            drawerLayout.openDrawer(GravityCompat.START)
+        }
+        val rightNow = Calendar.getInstance()
+        val hour: Int = rightNow.get(Calendar.HOUR_OF_DAY)
+        if (hour in 6..20) {
+            drawerLayout.setBackgroundResource(R.drawable.bggradientday)
+        }
         binding.loginButton.setOnClickListener {
             val email = binding.loginEmail.text.toString()
             val password = binding.loginPassword.text.toString()
