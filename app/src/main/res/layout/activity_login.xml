@@ -33,41 +33,51 @@
             <LinearLayout
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:layout_marginTop="330dp"
-                android:paddingLeft="25dp"
+                android:layout_marginTop="300dp"
                 android:orientation="vertical">
 
             <EditText
                 android:id="@+id/login_email"
+                android:layout_gravity="center"
                 android:layout_width="350dp"
                 android:layout_height="60dp"
                 android:layout_marginTop="30dp"
                 android:autofillHints=""
-                android:drawableLeft="@drawable/ic_baseline_email_24"
+                android:drawableStart="@drawable/ic_baseline_email_24"
                 android:drawablePadding="8dp"
-                android:hint="Email"
-                android:inputType=""
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
                 android:padding="8dp"
-                android:textColor="@color/black" />
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:drawableTint="@color/white"
+                android:backgroundTint="@color/white"/>
 
             <EditText
                 android:id="@+id/login_password"
+                android:layout_gravity="center"
                 android:layout_width="350dp"
                 android:layout_height="60dp"
                 android:layout_marginTop="20dp"
-                android:drawableLeft="@drawable/ic_baseline_lock_24"
+                android:drawableStart="@drawable/ic_baseline_lock_24"
                 android:drawablePadding="8dp"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:inputType="textPassword"
                 android:padding="8dp"
-                android:textColor="@color/black" />
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:autofillHints=""
+                android:drawableTint="@color/white"
+                android:backgroundTint="@color/white"/>
 
             <Button
                 android:id="@+id/login_button"
+                android:layout_gravity="center"
                 android:layout_width="350dp"
                 android:layout_height="70dp"
                 android:layout_marginTop="30dp"
-                android:text="Login"
+                android:text="@string/login"
+                android:backgroundTint="#5956AE"
                 android:textSize="18sp"
                 app:cornerRadius="30dp" />
 
@@ -78,8 +88,8 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="6dp"
                 android:padding="8dp"
-                android:text="Forgot Password?"
-                android:textColor="@color/purple_200"
+                android:text="@string/forgot_password"
+                android:textColor="@color/white"
                 android:textSize="16sp" />
 
             <TextView
@@ -89,8 +99,8 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="14dp"
                 android:padding="8dp"
-                android:text="Not yet registered? Signup"
-                android:textColor="@color/purple_200"
+                android:text="@string/not_yet_registered"
+                android:textColor="#AEADD7"
                 android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>

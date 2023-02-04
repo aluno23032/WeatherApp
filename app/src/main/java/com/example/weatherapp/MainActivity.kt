@@ -21,9 +21,11 @@ import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.example.weatherapp.databinding.ActivityMainBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 import org.json.JSONObject
 import java.util.*
 
@@ -62,11 +64,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var peaksday6: TextView
     private lateinit var peaksday7: TextView
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var binding: ActivityMainBinding
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        firebaseAuth = FirebaseAuth.getInstance()
         tableLayout = findViewById(R.id.tableLayout)
         tableLayout.visibility = View.INVISIBLE
         drawerLayout = findViewById(R.id.drawerLayout)
@@ -85,8 +91,6 @@ class MainActivity : AppCompatActivity() {
                     val signupIntent = Intent(this, LoginActivity::class.java)
                     startActivity(signupIntent)
                     drawerLayout.closeDrawer(GravityCompat.START)
-                }
-                else -> {
                 }
             }
             true
@@ -107,12 +111,6 @@ class MainActivity : AppCompatActivity() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         obtainLocation()
         tableLayout.visibility = View.VISIBLE
-    }
-
-    override fun onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
-            drawerLayout.closeDrawer(GravityCompat.START)
-        }
     }
 
     private fun weekDays() {

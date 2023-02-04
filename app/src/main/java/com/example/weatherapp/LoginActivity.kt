@@ -5,14 +5,12 @@ import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.weatherapp.databinding.ActivityLoginBinding
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import java.util.*
 
@@ -25,8 +23,31 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         firebaseAuth = FirebaseAuth.getInstance()
         val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
+        //val userText = findViewById<TextView>(R.id.username)
+        //userText.text = firebaseAuth.currentUser.toString()
+        val navigationView = findViewById<NavigationView>(R.id.navigationView)
+        navigationView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.optHome -> {
+                    val signupIntent = Intent(this, MainActivity::class.java)
+                    startActivity(signupIntent)
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                }
+                R.id.optRegister -> {
+                    val signupIntent = Intent(this, RegisterActivity::class.java)
+                    startActivity(signupIntent)
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                }
+                R.id.optLogin -> {
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                }
+                else -> {
+                }
+            }
+            true
+        }
         val menu = findViewById<ImageView>(R.id.menu)
-        menu.setOnClickListener{
+        menu.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
         }
         val rightNow = Calendar.getInstance()
@@ -47,7 +68,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
             } else {
-                Toast.makeText(this, "Fields cannot be empty", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.fields), Toast.LENGTH_SHORT).show()
             }
         }
         binding.forgotPassword.setOnClickListener {
@@ -85,7 +106,7 @@ class LoginActivity : AppCompatActivity() {
         firebaseAuth.sendPasswordResetEmail(email.text.toString())
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(this, "Check your email", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.checkEmail), Toast.LENGTH_SHORT).show()
                 }
             }
     }

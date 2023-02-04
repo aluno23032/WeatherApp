@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.weatherapp.databinding.ActivityRegisterBinding
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import java.util.*
 
@@ -20,8 +21,31 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
         firebaseAuth = FirebaseAuth.getInstance()
         val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
+        //val userText = findViewById<TextView>(R.id.username)
+        //userText.text = firebaseAuth.currentUser.toString()
+        val navigationView = findViewById<NavigationView>(R.id.navigationView)
+        navigationView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.optHome -> {
+                    val signupIntent = Intent(this, MainActivity::class.java)
+                    startActivity(signupIntent)
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                }
+                R.id.optRegister -> {
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                }
+                R.id.optLogin -> {
+                    val signupIntent = Intent(this, LoginActivity::class.java)
+                    startActivity(signupIntent)
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                }
+                else -> {
+                }
+            }
+            true
+        }
         val menu = findViewById<ImageView>(R.id.menu)
-        menu.setOnClickListener{
+        menu.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
         }
         val rightNow = Calendar.getInstance()

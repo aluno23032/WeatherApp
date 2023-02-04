@@ -18,4 +18,14 @@
     <string name="home">Página principal</string>
     <string name="welcome">Bem-vindo!</string>
     <string name="cities">Cidades</string>
+    <string name="fields">Os campos não podem ficar vazios</string>
+    <string name="checkEmail">Verifique o seu email</string>
+    <string name="password">Palavra-passe</string>
+    <string name="forgot_password">Esqueceu-se da sua palavra-passe?</string>
+    <string name="not_yet_registered">Ainda não está registado?</string>
+    <string name="confirm_password">Confirmar palavra-passe</string>
+    <string name="already_an_user">Já é utilizador? Faça Login</string>
+    <string name="enter_your_email_address">Introduza o seu email</string>
+    <string name="cancel">Cancelar</string>
+    <string name="reset">Repor</string>
 </resources>

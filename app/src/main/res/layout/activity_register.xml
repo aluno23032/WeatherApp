@@ -35,49 +35,64 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="275dp"
                 android:orientation="vertical"
-                android:paddingLeft="25dp">
+                android:paddingStart="25dp"
+                android:paddingEnd="25dp">
 
                 <EditText
                     android:id="@+id/signup_email"
                     android:layout_width="350dp"
                     android:layout_height="60dp"
                     android:layout_marginTop="30dp"
-                    android:drawableLeft="@drawable/ic_baseline_email_24"
+                    android:drawableStart="@drawable/ic_baseline_email_24"
                     android:drawablePadding="8dp"
-                    android:hint="Email"
+                    android:hint="@string/email"
                     android:padding="8dp"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:autofillHints=""
+                    android:inputType="textEmailAddress"
+                    android:textColorHint="@color/white"
+                    android:drawableTint="@color/white"
+                    android:backgroundTint="@color/white"/>
 
                 <EditText
                     android:id="@+id/signup_password"
                     android:layout_width="350dp"
                     android:layout_height="60dp"
                     android:layout_marginTop="20dp"
-                    android:drawableLeft="@drawable/ic_baseline_lock_24"
+                    android:drawableStart="@drawable/ic_baseline_lock_24"
                     android:drawablePadding="8dp"
-                    android:hint="Password"
+                    android:hint="@string/password"
                     android:inputType="textPassword"
                     android:padding="8dp"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:autofillHints=""
+                    android:textColorHint="@color/white"
+                    android:drawableTint="@color/white"
+                    android:backgroundTint="@color/white"/>
 
                 <EditText
                     android:id="@+id/signup_confirm"
                     android:layout_width="350dp"
                     android:layout_height="60dp"
                     android:layout_marginTop="20dp"
-                    android:drawableLeft="@drawable/ic_baseline_password_24"
+                    android:drawableStart="@drawable/ic_baseline_password_24"
                     android:drawablePadding="8dp"
-                    android:hint="Confirm Password"
+                    android:hint="@string/confirm_password"
                     android:inputType="textPassword"
                     android:padding="8dp"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:autofillHints=""
+                    android:textColorHint="@color/white"
+                    android:drawableTint="@color/white"
+                    android:backgroundTint="@color/white"/>
 
                 <Button
                     android:id="@+id/signup_button"
                     android:layout_width="350dp"
                     android:layout_height="70dp"
                     android:layout_marginTop="30dp"
-                    android:text="Sign Up"
+                    android:text="@string/register"
+                    android:backgroundTint="#5956AE"
                     android:textSize="18sp"
                     app:cornerRadius="30dp" />
 
@@ -88,8 +103,8 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="8dp"
                     android:padding="8dp"
-                    android:text="Already an user? Login"
-                    android:textColor="@color/purple_200"
+                    android:text="@string/already_an_user"
+                    android:textColor="#AEADD7"
                     android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>
