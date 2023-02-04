@@ -16,4 +16,9 @@
         android:title="@string/login"
         android:icon="@drawable/ic_login"/>
 
+    <item
+        android:id="@+id/optCities"
+        android:title="@string/cities"
+        android:icon="@drawable/ic_city"/>
+
 </menu>

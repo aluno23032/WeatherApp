@@ -2,13 +2,13 @@ package com.example.weatherapp
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TableLayout
 import android.widget.TextView
@@ -17,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
 import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
@@ -27,7 +26,6 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.material.navigation.NavigationView
 import org.json.JSONObject
 import java.util.*
-
 
 class MainActivity : AppCompatActivity() {
     private var weatherUrl = ""
@@ -73,22 +71,20 @@ class MainActivity : AppCompatActivity() {
         tableLayout.visibility = View.INVISIBLE
         drawerLayout = findViewById(R.id.drawerLayout)
         navigationView = findViewById(R.id.navigationView)
-        val container = findViewById<FrameLayout>(R.id.container)
         navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.optHome -> {
                     drawerLayout.closeDrawer(GravityCompat.START)
-                    container.visibility = View.INVISIBLE
                 }
                 R.id.optRegister -> {
-                    loadFragment(RegisterFragment())
+                    val signupIntent = Intent(this, RegisterActivity::class.java)
+                    startActivity(signupIntent)
                     drawerLayout.closeDrawer(GravityCompat.START)
-                    container.visibility = View.VISIBLE
                 }
                 R.id.optLogin -> {
-                    loadFragment(LoginFragment())
+                    val signupIntent = Intent(this, LoginActivity::class.java)
+                    startActivity(signupIntent)
                     drawerLayout.closeDrawer(GravityCompat.START)
-                    container.visibility = View.VISIBLE
                 }
                 else -> {
                 }
@@ -114,12 +110,6 @@ class MainActivity : AppCompatActivity() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         obtainLocation()
         tableLayout.visibility = View.VISIBLE
-    }
-
-    private fun loadFragment(fragment: Fragment) {
-        val ft = supportFragmentManager.beginTransaction()
-        ft.add(R.id.container, fragment)
-        ft.commit()
     }
 
     override fun onBackPressed() {

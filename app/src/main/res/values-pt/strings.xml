@@ -17,4 +17,5 @@
     <string name="login">Login</string>
     <string name="home">Página principal</string>
     <string name="welcome">Bem-vindo!</string>
+    <string name="cities">Cidades</string>
 </resources>
