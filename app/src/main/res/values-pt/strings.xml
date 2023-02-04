@@ -28,4 +28,5 @@
     <string name="enter_your_email_address">Introduza o seu email</string>
     <string name="cancel">Cancelar</string>
     <string name="reset">Repor</string>
+    <string name="logout">Terminar sessão</string>
 </resources>

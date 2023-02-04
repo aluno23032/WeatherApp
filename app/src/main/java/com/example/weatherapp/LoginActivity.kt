@@ -1,10 +1,12 @@
 package com.example.weatherapp
 
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
+import android.view.Menu
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
@@ -23,9 +25,22 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         firebaseAuth = FirebaseAuth.getInstance()
         val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
-        //val userText = findViewById<TextView>(R.id.username)
-        //userText.text = firebaseAuth.currentUser.toString()
         val navigationView = findViewById<NavigationView>(R.id.navigationView)
+        val navMenu: Menu = navigationView.menu
+        val headerView = navigationView.getHeaderView(0)
+        val navUsername = headerView.findViewById<TextView>(R.id.username)
+        val header = headerView.findViewById<LinearLayout>(R.id.header)
+        val email = firebaseAuth.currentUser?.email.toString()
+        val index: Int = email.indexOf('@')
+        if (firebaseAuth.currentUser != null) {
+            navMenu.findItem(R.id.optRegister).isVisible = false
+            navMenu.findItem(R.id.optLogin).isVisible = false
+            navUsername.text = email.substring(0,index)
+        } else {
+            navMenu.findItem(R.id.optCities).isVisible = false
+            navMenu.findItem(R.id.optLogout).isVisible = false
+            navUsername.text = "Guest"
+        }
         navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.optHome -> {
@@ -41,7 +56,11 @@ class LoginActivity : AppCompatActivity() {
                 R.id.optLogin -> {
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
-                else -> {
+                R.id.optLogout -> {
+                    firebaseAuth.signOut()
+                    val signupIntent = Intent(this, MainActivity::class.java)
+                    startActivity(signupIntent)
+                    drawerLayout.closeDrawer(GravityCompat.START)
                 }
             }
             true
@@ -53,6 +72,9 @@ class LoginActivity : AppCompatActivity() {
         val rightNow = Calendar.getInstance()
         val hour: Int = rightNow.get(Calendar.HOUR_OF_DAY)
         if (hour in 6..20) {
+            val loginButton = findViewById<Button>(R.id.login_button)
+            loginButton.setBackgroundColor(Color.parseColor("#74C1FF"))
+            header.setBackgroundColor(Color.parseColor("#A7D8FF"))
             drawerLayout.setBackgroundResource(R.drawable.bggradientday)
         }
         binding.loginButton.setOnClickListener {

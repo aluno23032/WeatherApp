@@ -4,12 +4,15 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TableLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
@@ -28,6 +31,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import org.json.JSONObject
 import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
     private var weatherUrl = ""
@@ -77,6 +81,21 @@ class MainActivity : AppCompatActivity() {
         tableLayout.visibility = View.INVISIBLE
         drawerLayout = findViewById(R.id.drawerLayout)
         navigationView = findViewById(R.id.navigationView)
+        val navMenu: Menu = navigationView.menu
+        val headerView = navigationView.getHeaderView(0)
+        val navUsername = headerView.findViewById<TextView>(R.id.username)
+        val header = headerView.findViewById<LinearLayout>(R.id.header)
+        val email = firebaseAuth.currentUser?.email.toString()
+        val index: Int = email.indexOf('@')
+        if (firebaseAuth.currentUser != null) {
+            navMenu.findItem(R.id.optRegister).isVisible = false
+            navMenu.findItem(R.id.optLogin).isVisible = false
+            navUsername.text = email.substring(0,index)
+        } else {
+            navMenu.findItem(R.id.optCities).isVisible = false
+            navMenu.findItem(R.id.optLogout).isVisible = false
+            navUsername.text = "Guest"
+        }
         navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.optHome -> {
@@ -92,6 +111,12 @@ class MainActivity : AppCompatActivity() {
                     startActivity(signupIntent)
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
+                R.id.optLogout -> {
+                    firebaseAuth.signOut()
+                    val signupIntent = Intent(this, MainActivity::class.java)
+                    startActivity(signupIntent)
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                }
             }
             true
         }
@@ -102,7 +127,8 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         rightNow = Calendar.getInstance()
         val hour: Int = rightNow.get(Calendar.HOUR_OF_DAY)
-        if (hour in 6..20) {
+        if (hour !in 6..20) {
+            header.setBackgroundColor(Color.parseColor("#A7D8FF"))
             drawerLayout.setBackgroundResource(R.drawable.bggradientday)
             tableLayout.setBackgroundResource(R.drawable.rectangleday)
         }

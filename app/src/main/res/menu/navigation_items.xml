@@ -21,4 +21,9 @@
         android:title="@string/cities"
         android:icon="@drawable/ic_city"/>
 
+    <item
+        android:id="@+id/optLogout"
+        android:title="@string/logout"
+        android:icon="@drawable/ic_logout"/>
+
 </menu>
