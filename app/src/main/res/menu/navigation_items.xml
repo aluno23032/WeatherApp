@@ -26,4 +26,8 @@
         android:title="@string/logout"
         android:icon="@drawable/ic_logout"/>
 
+    <item
+        android:id="@+id/optCreators"
+        android:title="@string/creators"
+        android:icon="@drawable/ic_people"/>
 </menu>

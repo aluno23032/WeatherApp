@@ -41,13 +41,13 @@ class LoginActivity : AppCompatActivity() {
         navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.optHome -> {
-                    val signupIntent = Intent(this, MainActivity::class.java)
-                    startActivity(signupIntent)
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
                 R.id.optRegister -> {
-                    val signupIntent = Intent(this, RegisterActivity::class.java)
-                    startActivity(signupIntent)
+                    val intent = Intent(this, RegisterActivity::class.java)
+                    startActivity(intent)
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
                 R.id.optLogin -> {
@@ -55,8 +55,13 @@ class LoginActivity : AppCompatActivity() {
                 }
                 R.id.optLogout -> {
                     firebaseAuth.signOut()
-                    val signupIntent = Intent(this, MainActivity::class.java)
-                    startActivity(signupIntent)
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                }
+                R.id.optCities -> {
+                    val intent = Intent(this, CitiesActivity::class.java)
+                    startActivity(intent)
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
             }

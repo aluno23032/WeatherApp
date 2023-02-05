@@ -30,4 +30,6 @@
     <string name="reset">Repor</string>
     <string name="logout">Terminar sessão</string>
     <string name="guest">Convidado</string>
+    <string name="add_city">Adicionar cidade</string>
+    <string name="creators">Acerca dos criadores</string>
 </resources>

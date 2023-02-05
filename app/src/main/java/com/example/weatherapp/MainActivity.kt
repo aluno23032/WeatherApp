@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
     private var weatherUrl2 = ""
     private var weatherUrl3 = ""
     private var apikey = "6ed6199c40174da593a7091e683ace8d"
+    private var apikey2 = "f44d87def21a4442a82fa73e0fbe4623"
     private lateinit var tableLayout: TableLayout
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
@@ -81,10 +82,22 @@ class MainActivity : AppCompatActivity() {
         tableLayout.visibility = View.INVISIBLE
         drawerLayout = findViewById(R.id.drawerLayout)
         navigationView = findViewById(R.id.navigationView)
-        val navMenu: Menu = navigationView.menu
         val headerView = navigationView.getHeaderView(0)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        obtainLocation()
+        setupMenu(headerView)
+        supportActionBar?.hide()
+        dayColors(headerView)
+        weekDays()
+        //create an instance of the Fused Location Provider Client
+
+
+        tableLayout.visibility = View.VISIBLE
+    }
+
+    private fun setupMenu(headerView: View) {
+        val navMenu: Menu = navigationView.menu
         val navUsername = headerView.findViewById<TextView>(R.id.username)
-        val header = headerView.findViewById<LinearLayout>(R.id.header)
         val email = firebaseAuth.currentUser?.email.toString()
         val index: Int = email.indexOf('@')
         if (firebaseAuth.currentUser != null) {
@@ -102,19 +115,24 @@ class MainActivity : AppCompatActivity() {
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
                 R.id.optRegister -> {
-                    val signupIntent = Intent(this, RegisterActivity::class.java)
-                    startActivity(signupIntent)
+                    val intent = Intent(this, RegisterActivity::class.java)
+                    startActivity(intent)
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
                 R.id.optLogin -> {
-                    val signupIntent = Intent(this, LoginActivity::class.java)
-                    startActivity(signupIntent)
+                    val intent = Intent(this, LoginActivity::class.java)
+                    startActivity(intent)
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
                 R.id.optLogout -> {
                     firebaseAuth.signOut()
-                    val signupIntent = Intent(this, MainActivity::class.java)
-                    startActivity(signupIntent)
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                }
+                R.id.optCities -> {
+                    val intent = Intent(this, CitiesActivity::class.java)
+                    startActivity(intent)
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
             }
@@ -124,19 +142,17 @@ class MainActivity : AppCompatActivity() {
         menu.setOnClickListener{
             drawerLayout.openDrawer(GravityCompat.START)
         }
-        supportActionBar?.hide()
+    }
+
+    private fun dayColors(headerView: View) {
         rightNow = Calendar.getInstance()
         val hour: Int = rightNow.get(Calendar.HOUR_OF_DAY)
+        val header = headerView.findViewById<LinearLayout>(R.id.header)
         if (hour in 6..20) {
             header.setBackgroundColor(Color.parseColor("#A7D8FF"))
             drawerLayout.setBackgroundResource(R.drawable.bggradientday)
             tableLayout.setBackgroundResource(R.drawable.rectangleday)
         }
-        weekDays()
-        //create an instance of the Fused Location Provider Client
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        obtainLocation()
-        tableLayout.visibility = View.VISIBLE
     }
 
     private fun weekDays() {
@@ -209,7 +225,7 @@ class MainActivity : AppCompatActivity() {
                 //get the latitude and longitude and create the http URL
                 weatherUrl = "https://api.weatherbit.io/v2.0/current?lang=" + Locale.getDefault().language + "&lat=" + location?.latitude +"&lon="+ location?.longitude + "&key="+ apikey
                 Log.d("query1", weatherUrl)
-                weatherUrl2 = "https://api.weatherbit.io/v2.0/forecast/daily?lat=" + location?.latitude +"&lon="+ location?.longitude + "&key="+ apikey + "&lang=" + Locale.getDefault().language + "&days=7"
+                weatherUrl2 = "https://api.weatherbit.io/v2.0/forecast/daily?lat=" + location?.latitude +"&lon="+ location?.longitude + "&key="+ apikey2 + "&lang=" + Locale.getDefault().language + "&days=7"
                 Log.d("query2", weatherUrl2)
                 //this function will fetch data from URL
                 getTemp()
