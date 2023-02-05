@@ -129,6 +129,7 @@ class AddCityActivity : AppCompatActivity() {
                 arrayCountry.add(it[1])
             }
         }
+        arrayCountry.sort()
         val adapterCountry = ArrayAdapter(this, android.R.layout.simple_spinner_item, arrayCountry)
         adapterCountry.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerCountry.adapter = adapterCountry
