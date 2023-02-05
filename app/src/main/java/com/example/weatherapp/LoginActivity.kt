@@ -2,13 +2,10 @@ package com.example.weatherapp
 
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Patterns
 import android.view.Menu
 import android.widget.*
-import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.weatherapp.databinding.ActivityLoginBinding
@@ -39,7 +36,7 @@ class LoginActivity : AppCompatActivity() {
         } else {
             navMenu.findItem(R.id.optCities).isVisible = false
             navMenu.findItem(R.id.optLogout).isVisible = false
-            navUsername.text = "Guest"
+            navUsername.text = getString(R.string.guest)
         }
         navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
@@ -73,15 +70,17 @@ class LoginActivity : AppCompatActivity() {
         val hour: Int = rightNow.get(Calendar.HOUR_OF_DAY)
         if (hour in 6..20) {
             val loginButton = findViewById<Button>(R.id.login_button)
+            val signUp = findViewById<TextView>(R.id.signupRedirectText)
+            signUp.setTextColor(Color.parseColor("#A7D8FF"))
             loginButton.setBackgroundColor(Color.parseColor("#74C1FF"))
             header.setBackgroundColor(Color.parseColor("#A7D8FF"))
             drawerLayout.setBackgroundResource(R.drawable.bggradientday)
         }
         binding.loginButton.setOnClickListener {
-            val email = binding.loginEmail.text.toString()
+            val emailLogin = binding.loginEmail.text.toString()
             val password = binding.loginPassword.text.toString()
-            if (email.isNotEmpty() && password.isNotEmpty()) {
-                firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
+            if (emailLogin.isNotEmpty() && password.isNotEmpty()) {
+                firebaseAuth.signInWithEmailAndPassword(emailLogin, password).addOnCompleteListener {
                     if (it.isSuccessful) {
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
@@ -93,43 +92,9 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, getString(R.string.fields), Toast.LENGTH_SHORT).show()
             }
         }
-        binding.forgotPassword.setOnClickListener {
-            val builder = AlertDialog.Builder(this)
-            val view = layoutInflater.inflate(R.layout.dialog_forgot, null)
-            val userEmail = view.findViewById<EditText>(R.id.editBox)
-            builder.setView(view)
-            val dialog = builder.create()
-            view.findViewById<Button>(R.id.btnReset).setOnClickListener {
-                compareEmail(userEmail)
-                dialog.dismiss()
-            }
-            view.findViewById<Button>(R.id.btnCancel).setOnClickListener {
-                dialog.dismiss()
-            }
-            if (dialog.window != null) {
-                dialog.window!!.setBackgroundDrawable(ColorDrawable(0))
-            }
-            dialog.show()
-        }
         binding.signupRedirectText.setOnClickListener {
             val signupIntent = Intent(this, RegisterActivity::class.java)
             startActivity(signupIntent)
         }
-    }
-
-    //Outside onCreate
-    private fun compareEmail(email: EditText) {
-        if (email.text.toString().isEmpty()) {
-            return
-        }
-        if (!Patterns.EMAIL_ADDRESS.matcher(email.text.toString()).matches()) {
-            return
-        }
-        firebaseAuth.sendPasswordResetEmail(email.text.toString())
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(this, getString(R.string.checkEmail), Toast.LENGTH_SHORT).show()
-                }
-            }
     }
 }

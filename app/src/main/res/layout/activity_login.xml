@@ -33,7 +33,7 @@
             <LinearLayout
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:layout_marginTop="300dp"
+                android:layout_marginTop="250dp"
                 android:orientation="vertical">
 
             <EditText
@@ -79,18 +79,8 @@
                 android:text="@string/login"
                 android:backgroundTint="#5956AE"
                 android:textSize="18sp"
-                app:cornerRadius="30dp" />
-
-            <TextView
-                android:id="@+id/forgot_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="6dp"
-                android:padding="8dp"
-                android:text="@string/forgot_password"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
+                app:cornerRadius="30dp"
+                tools:ignore="VisualLintButtonSize" />
 
             <TextView
                 android:id="@+id/signupRedirectText"

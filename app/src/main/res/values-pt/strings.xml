@@ -29,4 +29,5 @@
     <string name="cancel">Cancelar</string>
     <string name="reset">Repor</string>
     <string name="logout">Terminar sessão</string>
+    <string name="guest">Convidado</string>
 </resources>

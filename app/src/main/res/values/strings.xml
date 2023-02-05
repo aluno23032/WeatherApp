@@ -34,4 +34,5 @@
     <string name="cancel">Cancel</string>
     <string name="reset">Reset</string>
     <string name="logout">Logout</string>
+    <string name="guest">Guest</string>
 </resources>

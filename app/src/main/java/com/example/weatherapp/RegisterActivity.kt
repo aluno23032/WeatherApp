@@ -5,10 +5,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.weatherapp.databinding.ActivityRegisterBinding
@@ -39,7 +36,7 @@ class RegisterActivity : AppCompatActivity() {
         } else {
             navMenu.findItem(R.id.optCities).isVisible = false
             navMenu.findItem(R.id.optLogout).isVisible = false
-            navUsername.text = "Guest"
+            navUsername.text = getString(R.string.guest)
         }
         navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
@@ -72,16 +69,20 @@ class RegisterActivity : AppCompatActivity() {
         val rightNow = Calendar.getInstance()
         val hour: Int = rightNow.get(Calendar.HOUR_OF_DAY)
         if (hour in 6..20) {
+            val registerButton = findViewById<Button>(R.id.register_button)
+            val loginRedirect = findViewById<TextView>(R.id.loginRedirectText)
+            loginRedirect.setTextColor(Color.parseColor("#A7D8FF"))
+            registerButton.setBackgroundColor(Color.parseColor("#74C1FF"))
             header.setBackgroundColor(Color.parseColor("#A7D8FF"))
             drawerLayout.setBackgroundResource(R.drawable.bggradientday)
         }
-        binding.signupButton.setOnClickListener {
-            val email = binding.signupEmail.text.toString()
+        binding.registerButton.setOnClickListener {
+            val emailRegister = binding.signupEmail.text.toString()
             val password = binding.signupPassword.text.toString()
             val confirmPassword = binding.signupConfirm.text.toString()
-            if (email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()) {
+            if (emailRegister.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()) {
                 if (password == confirmPassword) {
-                    firebaseAuth.createUserWithEmailAndPassword(email, password)
+                    firebaseAuth.createUserWithEmailAndPassword(emailRegister, password)
                         .addOnCompleteListener {
                             if (it.isSuccessful) {
                                 val intent = Intent(this, LoginActivity::class.java)

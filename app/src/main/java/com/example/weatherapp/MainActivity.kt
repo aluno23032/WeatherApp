@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             navMenu.findItem(R.id.optCities).isVisible = false
             navMenu.findItem(R.id.optLogout).isVisible = false
-            navUsername.text = "Guest"
+            navUsername.text = getString(R.string.guest)
         }
         navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
@@ -127,7 +127,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         rightNow = Calendar.getInstance()
         val hour: Int = rightNow.get(Calendar.HOUR_OF_DAY)
-        if (hour !in 6..20) {
+        if (hour in 6..20) {
             header.setBackgroundColor(Color.parseColor("#A7D8FF"))
             drawerLayout.setBackgroundResource(R.drawable.bggradientday)
             tableLayout.setBackgroundResource(R.drawable.rectangleday)
