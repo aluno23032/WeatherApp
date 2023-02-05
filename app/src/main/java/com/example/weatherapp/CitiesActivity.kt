@@ -72,7 +72,6 @@ class CitiesActivity : AppCompatActivity() {
             modelList.add(cityModel(cityList[i], weatherList[i], imageList[i]))
         }
         if (firebaseAuth.currentUser != null) {
-            navMenu.findItem(R.id.optRegister).isVisible = false
             navMenu.findItem(R.id.optLogin).isVisible = false
             navUsername.text = email.substring(0,index)
         } else {
@@ -84,11 +83,6 @@ class CitiesActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.optHome -> {
                     val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    drawerLayout.closeDrawer(GravityCompat.START)
-                }
-                R.id.optRegister -> {
-                    val intent = Intent(this, RegisterActivity::class.java)
                     startActivity(intent)
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }

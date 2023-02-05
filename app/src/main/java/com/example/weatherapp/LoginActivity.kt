@@ -30,7 +30,6 @@ class LoginActivity : AppCompatActivity() {
         val email = firebaseAuth.currentUser?.email.toString()
         val index: Int = email.indexOf('@')
         if (firebaseAuth.currentUser != null) {
-            navMenu.findItem(R.id.optRegister).isVisible = false
             navMenu.findItem(R.id.optLogin).isVisible = false
             navUsername.text = email.substring(0,index)
         } else {
@@ -42,11 +41,6 @@ class LoginActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.optHome -> {
                     val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    drawerLayout.closeDrawer(GravityCompat.START)
-                }
-                R.id.optRegister -> {
-                    val intent = Intent(this, RegisterActivity::class.java)
                     startActivity(intent)
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }

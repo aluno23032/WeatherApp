@@ -7,9 +7,14 @@
         android:icon="@drawable/ic_home"/>
 
     <item
-        android:id="@+id/optRegister"
-        android:title="@string/register"
-        android:icon="@drawable/ic_register"/>
+        android:id="@+id/optCities"
+        android:title="@string/cities"
+        android:icon="@drawable/ic_city"/>
+
+    <item
+        android:id="@+id/optCreators"
+        android:title="@string/creators"
+        android:icon="@drawable/ic_people"/>
 
     <item
         android:id="@+id/optLogin"
@@ -17,17 +22,7 @@
         android:icon="@drawable/ic_login"/>
 
     <item
-        android:id="@+id/optCities"
-        android:title="@string/cities"
-        android:icon="@drawable/ic_city"/>
-
-    <item
         android:id="@+id/optLogout"
         android:title="@string/logout"
         android:icon="@drawable/ic_logout"/>
-
-    <item
-        android:id="@+id/optCreators"
-        android:title="@string/creators"
-        android:icon="@drawable/ic_people"/>
 </menu>
