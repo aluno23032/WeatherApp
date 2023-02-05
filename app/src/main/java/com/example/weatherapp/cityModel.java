@@ -10,15 +10,12 @@ public class cityModel {
         this.weather = weather;
         this.image = image;
     }
-
     public String getCity() {
         return city;
     }
-
     public String getWeather() {
         return weather;
     }
-
     public int getImage() {
         return image;
     }

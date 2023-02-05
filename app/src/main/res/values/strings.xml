@@ -39,4 +39,7 @@
     <string name="creators">About the creators</string>
     <string name="student23032"><a href="https://github.com/aluno23032">student23032</a></string>
     <string name="student23319"><a href="https://github.com/AndreValaa">student23319</a></string>
+    <string name="country">Country</string>
+    <string name="state">State</string>
+    <string name="city">City</string>
 </resources>

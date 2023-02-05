@@ -8,7 +8,6 @@
     android:layout_gravity="start"
     android:background="@drawable/bggradientnight"
     android:fitsSystemWindows="true"
-    tools:context=".LoginActivity"
     tools:openDrawer="start">
 
     <ScrollView

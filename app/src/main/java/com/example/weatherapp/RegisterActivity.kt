@@ -2,10 +2,10 @@ package com.example.weatherapp
 
 import android.content.Intent
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.weatherapp.databinding.ActivityRegisterBinding
@@ -60,6 +60,11 @@ class RegisterActivity : AppCompatActivity() {
                     startActivity(intent)
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
+                R.id.optCreators -> {
+                    val intent = Intent(this, CreatorsActivity::class.java)
+                    startActivity(intent)
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                }
             }
             true
         }
@@ -69,7 +74,7 @@ class RegisterActivity : AppCompatActivity() {
         }
         val rightNow = Calendar.getInstance()
         val hour: Int = rightNow.get(Calendar.HOUR_OF_DAY)
-        if (hour in 6..20) {
+        if (hour in 7..19) {
             val registerButton = findViewById<Button>(R.id.register_button)
             val loginRedirect = findViewById<TextView>(R.id.loginRedirectText)
             loginRedirect.setTextColor(Color.parseColor("#A7D8FF"))

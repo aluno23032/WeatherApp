@@ -129,6 +129,11 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
+                R.id.optCreators -> {
+                    val intent = Intent(this, CreatorsActivity::class.java)
+                    startActivity(intent)
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                }
             }
             true
         }
@@ -142,7 +147,8 @@ class MainActivity : AppCompatActivity() {
         rightNow = Calendar.getInstance()
         val hour: Int = rightNow.get(Calendar.HOUR_OF_DAY)
         val header = headerView.findViewById<LinearLayout>(R.id.header)
-        if (hour in 6..20) {
+        if (hour in 7..19) {
+            Log.d("teste", hour.toString())
             header.setBackgroundColor(Color.parseColor("#A7D8FF"))
             drawerLayout.setBackgroundResource(R.drawable.bggradientday)
             tableLayout.setBackgroundResource(R.drawable.rectangleday)

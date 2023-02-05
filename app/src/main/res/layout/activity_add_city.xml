@@ -8,7 +8,6 @@
     android:layout_gravity="start"
     android:background="@drawable/bggradientnight"
     android:fitsSystemWindows="true"
-    tools:context=".LoginActivity"
     tools:openDrawer="start">
 
     <ScrollView
@@ -35,48 +34,55 @@
                 android:layout_width="match_parent"
                 android:layout_marginTop="0dp"
                 android:orientation="vertical">
-
-                <EditText
-                    android:id="@+id/login_email"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/country"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginStart="45dp"
+                    android:fontFamily="sans-serif-thin"
+                    android:textColor="#F6F8F5"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+                <Spinner
+                    android:id="@+id/country"
+                    android:layout_width="265dp"
+                    android:layout_height="45dp"
                     android:layout_gravity="center"
-                    android:layout_width="350dp"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="30dp"
-                    android:autofillHints=""
-                    android:drawableStart="@drawable/ic_email"
-                    android:drawablePadding="8dp"
-                    android:hint="@string/email"
-                    android:inputType="textEmailAddress"
-                    android:padding="8dp"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
-                    android:drawableTint="@color/white"
-                    android:backgroundTint="@color/white"/>
-
-                <EditText
-                    android:id="@+id/login_password"
+                    android:contentDescription="@string/country"
+                    android:layout_marginTop="10dp"
+                    android:scaleX="1.2"
+                    android:scaleY="1.2"
+                    android:background="@color/white"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/city"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginStart="45dp"
+                    android:fontFamily="sans-serif-thin"
+                    android:textColor="#F6F8F5"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+                <Spinner
+                    android:id="@+id/city"
+                    android:layout_width="265dp"
+                    android:layout_height="45dp"
                     android:layout_gravity="center"
-                    android:layout_width="350dp"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="20dp"
-                    android:drawableStart="@drawable/ic_lock"
-                    android:drawablePadding="8dp"
-                    android:hint="@string/password"
-                    android:inputType="textPassword"
-                    android:padding="8dp"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
-                    android:autofillHints=""
-                    android:drawableTint="@color/white"
-                    android:backgroundTint="@color/white"/>
-
+                    android:contentDescription="@string/country"
+                    android:layout_marginTop="10dp"
+                    android:scaleX="1.2"
+                    android:scaleY="1.2"
+                    android:background="@color/white"
+                    />
                 <Button
-                    android:id="@+id/login_button"
+                    android:id="@+id/addBtn"
                     android:layout_gravity="center"
-                    android:layout_width="350dp"
+                    android:layout_width="250dp"
                     android:layout_height="70dp"
                     android:layout_marginTop="30dp"
-                    android:text="@string/login"
+                    android:text="@string/add_city"
                     android:backgroundTint="#5956AE"
                     android:textSize="18sp"
                     app:cornerRadius="30dp"
